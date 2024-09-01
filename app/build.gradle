@@ -29,7 +29,7 @@ java {
 }
 
 application {
-    mainClass = 'org.example.App'
+    mainClass = 'info.developia.Launcher'
 }
 
 tasks.named('test') {
