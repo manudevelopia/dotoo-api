@@ -66,7 +66,7 @@ public class SchemaGenerator {
     private final DataFetcher<Task> createTask = environment -> {
         String title = environment.getArgument("title");
         var task = new Task(null, title, false);
-        return taskService.add(task);
+        return taskService.create(task);
     };
 
     private final DataFetcher<Task> updateTask = environment -> {
