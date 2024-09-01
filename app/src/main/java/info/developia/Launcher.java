@@ -1,6 +1,5 @@
 package info.developia;
 
-
 import info.developia.dotoo.api.persistence.Persistence;
 import info.developia.dotoo.api.server.GraphqlService;
 import info.developia.dotoo.api.service.TaskService;
