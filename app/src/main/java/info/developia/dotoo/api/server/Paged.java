@@ -1,4 +1,4 @@
-package info.developia.dotoo.server;
+package info.developia.dotoo.api.server;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

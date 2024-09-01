@@ -1,4 +1,4 @@
-package info.developia.dotoo.model;
+package info.developia.dotoo.api.model;
 
 public record Task(
         String id,

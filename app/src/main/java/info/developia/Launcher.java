@@ -1,9 +1,10 @@
-package info.developia.dotoo;
+package info.developia;
 
 
-import info.developia.dotoo.server.GraphqlService;
+import info.developia.dotoo.api.server.GraphqlService;
+import info.developia.dotoo.api.service.TaskService;
 
-public class App {
+public class Launcher {
 
     public static void main(String[] args) {
         var taskService = new TaskService();

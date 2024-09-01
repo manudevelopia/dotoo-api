@@ -1,10 +1,10 @@
-package info.developia.dotoo.server;
+package info.developia.dotoo.api.server;
 
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
-import info.developia.dotoo.TaskService;
+import info.developia.dotoo.api.service.TaskService;
 import ratpack.core.handling.Context;
 import ratpack.core.http.MediaType;
 import ratpack.core.server.BaseDir;

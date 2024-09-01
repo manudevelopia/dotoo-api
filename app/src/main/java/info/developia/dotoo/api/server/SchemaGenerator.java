@@ -1,12 +1,12 @@
-package info.developia.dotoo.server;
+package info.developia.dotoo.api.server;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
-import info.developia.dotoo.TaskService;
-import info.developia.dotoo.model.Task;
+import info.developia.dotoo.api.service.TaskService;
+import info.developia.dotoo.api.model.Task;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;

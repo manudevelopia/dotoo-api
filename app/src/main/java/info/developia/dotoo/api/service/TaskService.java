@@ -1,6 +1,6 @@
-package info.developia.dotoo;
+package info.developia.dotoo.api.service;
 
-import info.developia.dotoo.model.Task;
+import info.developia.dotoo.api.model.Task;
 
 import java.util.HashMap;
 import java.util.List;
