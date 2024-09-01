@@ -42,6 +42,8 @@ public class SchemaGenerator {
                 .type("Query", builder -> builder.dataFetcher("task", getTaskById))
                 .type("Query", builder -> builder.dataFetcher("tasks", getAllTasksPaged))
                 .type("Mutation", builder -> builder.dataFetcher("create", createTask))
+                .type("Mutation", builder -> builder.dataFetcher("update", updateTask))
+                .type("Mutation", builder -> builder.dataFetcher("delete", deleteTask))
                 .build();
     }
 
@@ -50,15 +52,12 @@ public class SchemaGenerator {
         return taskService.getById(id);
     };
 
+
     private final DataFetcher<Paged<Task>> getAllTasksPaged = environment -> {
         int page = environment.getArgumentOrDefault("page", 1);
         int limit = environment.getArgumentOrDefault("limit", 25);
         int offset = (page - 1) * limit;
         int taskSize = taskService.getSize();
-//        items - list of items paginated items.
-//        limit - number of items per page.
-//        offset - number of skipped items.
-//        total - total number of items.
         var results = taskService.getTasks(offset, offset + limit);
         return new Paged<>(page, results, taskSize / limit, taskSize);
     };
@@ -68,5 +67,20 @@ public class SchemaGenerator {
         String title = environment.getArgument("title");
         var task = new Task(null, title, false);
         return taskService.add(task);
+    };
+
+    private final DataFetcher<Task> updateTask = environment -> {
+        String id = environment.getArgument("id");
+        var task = taskService.getById(id);
+        String title = environment.getArgumentOrDefault("title", task.title());
+        Boolean done = environment.getArgumentOrDefault("done", task.done());
+        var updatedTask = new Task(id, title, done);
+        taskService.update(updatedTask);
+        return updatedTask;
+    };
+
+    private final DataFetcher<Task> deleteTask = environment -> {
+        String id = environment.getArgument("id");
+        return taskService.deleteById(id);
     };
 }

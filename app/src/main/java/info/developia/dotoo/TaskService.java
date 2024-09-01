@@ -11,7 +11,7 @@ public class TaskService {
     private final Map<String, Task> tasks = new HashMap<>();
 
     public TaskService() {
-        IntStream.rangeClosed(1, 500).forEach(item -> {
+        IntStream.rangeClosed(1, 5234).forEach(item -> {
                     var id = String.valueOf(item);
                     tasks.put(id, new Task(id, "my task " + id, false));
                 }
@@ -34,12 +34,16 @@ public class TaskService {
     }
 
     public List<Task> getTasks(int offset, int limit) {
-//        items - list of items paginated items.
-//        limit - number of items per page.
-//        offset - number of skipped items.
-//        total - total number of items.
         if (offset > getSize()) offset = getSize();
         if (limit > getSize()) limit = getSize();
         return tasks.values().stream().toList().subList(offset, limit);
+    }
+
+    public void update(Task task) {
+        tasks.put(task.id(), task);
+    }
+
+    public Task deleteById(String id) {
+        return tasks.remove(id);
     }
 }

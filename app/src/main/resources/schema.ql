@@ -18,4 +18,6 @@ type Query {
 
 type Mutation {
     create(title: String): Task
+    update(id: String!, title: String, done: Boolean): Task
+    delete(id: String!): Task
 }
