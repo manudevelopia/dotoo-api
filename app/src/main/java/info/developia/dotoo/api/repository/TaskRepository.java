@@ -38,19 +38,27 @@ public class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    public void deleteById(String id) {
+    public int create(Task task) {
         try {
-            repository(repository -> repository.deleteById(Integer.parseInt(id)));
+            return repository(repository -> repository.create(task));
+        } catch (PersistenceException e) {
+            throw new RuntimeException("Error creating task, %s".formatted(e.getMessage()));
+        }
+    }
+
+    public int deleteById(String id) {
+        try {
+            return repository(repository -> repository.deleteById(Integer.parseInt(id)));
         } catch (PersistenceException e) {
             throw new RuntimeException("Error deleting task, %s".formatted(e.getMessage()));
         }
     }
 
-    public void create(Task task) {
+    public int update(Task task) {
         try {
-            repository(repository -> repository.create(task));
+            return repository(repository -> repository.update(task));
         } catch (PersistenceException e) {
-            throw new RuntimeException("Error creating task, %s".formatted(e.getMessage()));
+            throw new RuntimeException("Error updating task, %s".formatted(e.getMessage()));
         }
     }
 }

@@ -3,24 +3,12 @@ package info.developia.dotoo.api.service;
 import info.developia.dotoo.api.model.Task;
 import info.developia.dotoo.api.repository.TaskRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
 
 import static info.developia.Launcher.persistence;
 
 public class TaskService {
-    private final Map<String, Task> tasks = new HashMap<>();
     private final TaskRepository taskRepository = new TaskRepository(persistence);
-
-    public TaskService() {
-        IntStream.rangeClosed(1, 5234).forEach(item -> {
-                    var id = String.valueOf(item);
-                    tasks.put(id, new Task(id, "my task " + id, false));
-                }
-        );
-    }
 
     public List<Task> getTasks(int offset, int limit) {
         int taskSize = getSize();
@@ -37,18 +25,15 @@ public class TaskService {
         return taskRepository.getById(id);
     }
 
-    public Task create(Task task) {
-        taskRepository.create(task);
-        return task;
+    public int create(Task task) {
+        return taskRepository.create(task);
     }
 
-    public void update(Task task) {
-        tasks.put(task.id(), task);
+    public int update(Task task) {
+        return taskRepository.update(task);
     }
 
-    public Task deleteById(String id) {
-        var task = taskRepository.getById(id);
-        taskRepository.deleteById(id);
-        return task;
+    public int deleteById(String id) {
+        return taskRepository.deleteById(id);
     }
 }

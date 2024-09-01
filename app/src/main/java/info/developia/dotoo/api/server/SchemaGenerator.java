@@ -5,8 +5,8 @@ import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
-import info.developia.dotoo.api.service.TaskService;
 import info.developia.dotoo.api.model.Task;
+import info.developia.dotoo.api.service.TaskService;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -63,23 +63,22 @@ public class SchemaGenerator {
     };
 
 
-    private final DataFetcher<Task> createTask = environment -> {
+    private final DataFetcher<Integer> createTask = environment -> {
         String title = environment.getArgument("title");
         var task = new Task(null, title, false);
         return taskService.create(task);
     };
 
-    private final DataFetcher<Task> updateTask = environment -> {
+    private final DataFetcher<Integer> updateTask = environment -> {
         String id = environment.getArgument("id");
         var task = taskService.getById(id);
         String title = environment.getArgumentOrDefault("title", task.title());
         Boolean done = environment.getArgumentOrDefault("done", task.done());
-        var updatedTask = new Task(id, title, done);
-        taskService.update(updatedTask);
-        return updatedTask;
+        var updatedTask = new Task(Integer.parseInt(id), title, done);
+        return taskService.update(updatedTask);
     };
 
-    private final DataFetcher<Task> deleteTask = environment -> {
+    private final DataFetcher<Integer> deleteTask = environment -> {
         String id = environment.getArgument("id");
         return taskService.deleteById(id);
     };

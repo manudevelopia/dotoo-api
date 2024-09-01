@@ -40,4 +40,13 @@ public interface TaskMapper {
             where t_id = #{arg0}
             """)
     int deleteById(int id);
+
+    @Update("""
+            update dotoo.tasks
+            set t_title = #{title},
+                t_done = #{done},
+                t_updated_on = now()
+            where t_id = #{id}
+            """)
+    int update(Task task);
 }
