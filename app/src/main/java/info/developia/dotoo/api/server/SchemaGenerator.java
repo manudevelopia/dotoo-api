@@ -59,7 +59,8 @@ public class SchemaGenerator {
         int offset = (page - 1) * limit;
         int taskSize = taskService.getSize();
         var results = taskService.getTasks(offset, offset + limit);
-        return new Paged<>(page, results, taskSize / limit, taskSize);
+        var totalPages = results.size() < limit ? 1 : taskSize / limit;
+        return new Paged<>(page, results, totalPages, taskSize);
     };
 
 
@@ -74,7 +75,7 @@ public class SchemaGenerator {
         var task = taskService.getById(id);
         String title = environment.getArgumentOrDefault("title", task.title());
         Boolean done = environment.getArgumentOrDefault("done", task.done());
-        var updatedTask = new Task(Integer.parseInt(id), title, done);
+        var updatedTask = new Task(id, title, done);
         return taskService.update(updatedTask);
     };
 
