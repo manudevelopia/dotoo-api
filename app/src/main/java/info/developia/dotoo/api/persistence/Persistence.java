@@ -1,6 +1,5 @@
 package info.developia.dotoo.api.persistence;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -12,7 +11,6 @@ import javax.sql.DataSource;
 
 public class Persistence {
     private final SqlSessionFactory sqlSessionFactory;
-    private final Dotenv dotenv = Dotenv.load();
 
     public Persistence(String packageName) {
         sqlSessionFactory = buildSqlSessionFactory(packageName);
@@ -21,9 +19,9 @@ public class Persistence {
     private SqlSessionFactory buildSqlSessionFactory(String mappersPackageName) {
         DataSource dataSource = new PooledDataSource(
                 "org.postgresql.Driver",
-                dotenv.get("DATABASE_URL"),
-                dotenv.get("DATABASE_USER"),
-                dotenv.get("DATABASE_PASSWORD"));
+                System.getenv("DATABASE_URL"),
+                System.getenv("DATABASE_USER"),
+                System.getenv("DATABASE_PASSWORD"));
         Environment environment = new Environment("Default", new JdbcTransactionFactory(), dataSource);
         Configuration configuration = new Configuration(environment);
         configuration.addMappers(mappersPackageName);
