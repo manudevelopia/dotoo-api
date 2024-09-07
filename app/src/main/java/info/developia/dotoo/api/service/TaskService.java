@@ -1,9 +1,11 @@
 package info.developia.dotoo.api.service;
 
+import info.developia.dotoo.api.exception.DotooException;
 import info.developia.dotoo.api.model.Task;
 import info.developia.dotoo.api.repository.TaskRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static info.developia.Launcher.persistence;
 
@@ -22,7 +24,8 @@ public class TaskService {
     }
 
     public Task getById(String id) {
-        return taskRepository.getById(id);
+        return Optional.ofNullable(taskRepository.getById(id))
+                .orElseThrow(() -> new DotooException("Task with id: " + id + " cannot be found"));
     }
 
     public int create(Task task) {
