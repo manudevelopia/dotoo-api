@@ -59,8 +59,8 @@ public class SchemaGenerator {
         int offset = (page - 1) * limit;
         int taskSize = taskService.getSize();
         var results = taskService.getTasks(offset, offset + limit);
-        var totalPages = results.size() < limit ? 1 : taskSize / limit;
-        return new Paged<>(page, results, totalPages, taskSize);
+        var totalPages = results.isEmpty() ? 0 : results.size() < limit ? 1 : taskSize / limit;
+        return new Paged<>(results.isEmpty() ? 0 : page, results, totalPages, taskSize);
     };
 
 

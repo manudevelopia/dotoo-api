@@ -24,9 +24,9 @@ public interface TaskMapper {
     @Select("""
             select t_id, t_title, t_done
             from dotoo.tasks
-            where t_id = #{arg0}
+            where t_id = #{arg0}::uuid
             """)
-    Task getById(int id);
+    Task getById(String id);
 
     @Update("""
             insert into dotoo.tasks(t_title, t_created_on)
@@ -37,16 +37,16 @@ public interface TaskMapper {
     @Delete("""
             delete
             from dotoo.tasks
-            where t_id = #{arg0}
+            where t_id = #{arg0}::uuid
             """)
-    int deleteById(int id);
+    int deleteById(String id);
 
     @Update("""
             update dotoo.tasks
             set t_title = #{title},
                 t_done = #{done},
                 t_updated_on = now()
-            where t_id = #{id}
+            where t_id = #{id}::uuid
             """)
     int update(Task task);
 }
