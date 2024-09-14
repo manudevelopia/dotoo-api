@@ -32,3 +32,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build the Docker slimjar image
         run: ./gradlew slimjar
+      - name: Publish slimjar image built on DockerHub
+        run: ./gradlew publish
