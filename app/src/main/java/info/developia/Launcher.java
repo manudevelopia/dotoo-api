@@ -9,8 +9,6 @@ public class Launcher {
     public static void main(String[] args) {
         Persistence persistence = new Persistence("info.developia.dotoo.api.repository.mapper");
 
-        Gti.inject()
-                .with(persistence)
-                .startOn(GraphqlService.class).start();
+        Gti.inject().with(persistence).startOn(GraphqlService.class).start();
     }
 }
