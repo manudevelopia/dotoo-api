@@ -2,6 +2,7 @@ package info.developia.dotoo.api.repository.mapper;
 
 import info.developia.dotoo.api.model.Task;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface TaskMapper {
             from dotoo.tasks
             offset #{arg0} limit #{arg1}
             """)
+    @Options(flushCache = Options.FlushCachePolicy.TRUE)
     List<Task> getTasks(int offset, int limit);
 
     @Select("""
