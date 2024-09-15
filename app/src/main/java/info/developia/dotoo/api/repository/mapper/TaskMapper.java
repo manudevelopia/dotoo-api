@@ -3,7 +3,6 @@ package info.developia.dotoo.api.repository.mapper;
 import info.developia.dotoo.api.model.Task;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
