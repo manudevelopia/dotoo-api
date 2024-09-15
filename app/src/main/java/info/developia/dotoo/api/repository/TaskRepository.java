@@ -39,7 +39,7 @@ public class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    public int create(Task task) {
+    public Task create(Task task) {
         try {
             return repository(repository -> repository.create(task));
         } catch (PersistenceException e) {
@@ -55,7 +55,7 @@ public class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    public int update(Task task) {
+    public Task update(Task task) {
         try {
             return repository(repository -> repository.update(task));
         } catch (PersistenceException e) {

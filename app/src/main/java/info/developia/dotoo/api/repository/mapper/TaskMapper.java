@@ -28,11 +28,12 @@ public interface TaskMapper {
             """)
     Task getById(String id);
 
-    @Update("""
+    @Select("""
             insert into dotoo.tasks(t_title, t_created_on)
             values(#{title}, now())
+            returning t_id, t_title, t_done
             """)
-    int create(Task task);
+    Task create(Task task);
 
     @Delete("""
             delete
@@ -41,12 +42,13 @@ public interface TaskMapper {
             """)
     int deleteById(String id);
 
-    @Update("""
+    @Select("""
             update dotoo.tasks
             set t_title = #{title},
                 t_done = #{done},
                 t_updated_on = now()
             where t_id = #{id}::uuid
+            returning t_id, t_title, t_done
             """)
-    int update(Task task);
+    Task update(Task task);
 }

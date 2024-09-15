@@ -12,12 +12,12 @@ type PagedTasks {
 }
 
 type Query {
-    task(id: String) : Task
+    task(id: String): Task
     tasks(page: Int, limit: Int): PagedTasks
 }
 
 type Mutation {
-    create(title: String): Int
-    update(id: String!, title: String, done: Boolean): Int
+    create(title: String): Task
+    update(id: String!, title: String, done: Boolean): Task
     delete(id: String!): Int
 }

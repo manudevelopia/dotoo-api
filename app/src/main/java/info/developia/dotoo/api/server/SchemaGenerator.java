@@ -64,13 +64,13 @@ public class SchemaGenerator {
     };
 
 
-    private final DataFetcher<Integer> createTask = environment -> {
+    private final DataFetcher<Task> createTask = environment -> {
         String title = environment.getArgument("title");
         var task = new Task(null, title, false);
         return taskService.create(task);
     };
 
-    private final DataFetcher<Integer> updateTask = environment -> {
+    private final DataFetcher<Task> updateTask = environment -> {
         String id = environment.getArgument("id");
         var task = taskService.getById(id);
         String title = environment.getArgumentOrDefault("title", task.title());

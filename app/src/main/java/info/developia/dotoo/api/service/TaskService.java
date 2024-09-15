@@ -7,10 +7,12 @@ import info.developia.dotoo.api.repository.TaskRepository;
 import java.util.List;
 import java.util.Optional;
 
-import static info.developia.Launcher.persistence;
-
 public class TaskService {
-    private final TaskRepository taskRepository = new TaskRepository(persistence);
+    private final TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     public List<Task> getTasks(int offset, int limit) {
         int taskSize = getSize();
@@ -28,11 +30,11 @@ public class TaskService {
                 .orElseThrow(() -> new DotooException("Task with id: " + id + " cannot be found"));
     }
 
-    public int create(Task task) {
+    public Task create(Task task) {
         return taskRepository.create(task);
     }
 
-    public int update(Task task) {
+    public Task update(Task task) {
         return taskRepository.update(task);
     }
 
