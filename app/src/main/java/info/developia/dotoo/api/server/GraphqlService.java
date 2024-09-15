@@ -3,8 +3,6 @@ package info.developia.dotoo.api.server;
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
-import graphql.schema.GraphQLSchema;
-import info.developia.dotoo.api.service.TaskService;
 import ratpack.core.handling.Context;
 import ratpack.core.http.MediaType;
 import ratpack.core.server.BaseDir;
@@ -15,9 +13,8 @@ import static ratpack.core.jackson.Jackson.json;
 public class GraphqlService {
     private final GraphQL graphQL;
 
-    public GraphqlService(TaskService taskService) {
-        GraphQLSchema graphQLSchema = getGraphQLSchema(taskService);
-        graphQL = GraphQL.newGraphQL(graphQLSchema).build();
+    public GraphqlService(SchemaGenerator schemaGenerator) {
+        this.graphQL = GraphQL.newGraphQL(schemaGenerator.generate()).build();
     }
 
     public void start() {
@@ -31,10 +28,6 @@ public class GraphqlService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static GraphQLSchema getGraphQLSchema(TaskService taskService) {
-        return new SchemaGenerator(taskService).generate();
     }
 
     public Object query(Request request) {

@@ -1,11 +1,11 @@
 package info.developia.dotoo.api.repository;
 
+import info.developia.dotoo.api.exception.DotooException;
 import info.developia.dotoo.api.model.Task;
 import info.developia.dotoo.api.persistence.Persistence;
 import info.developia.dotoo.api.persistence.PersistenceException;
 import info.developia.dotoo.api.persistence.Repository;
 import info.developia.dotoo.api.repository.mapper.TaskMapper;
-import info.developia.dotoo.api.exception.DotooException;
 
 import java.util.List;
 

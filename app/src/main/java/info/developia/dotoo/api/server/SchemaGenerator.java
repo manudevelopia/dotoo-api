@@ -29,7 +29,7 @@ public class SchemaGenerator {
         return schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
     }
 
-    private static String getSchema() {
+    private String getSchema() {
         try (InputStream is = ClassLoader.getSystemResourceAsStream("schema.ql")) {
             return new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
