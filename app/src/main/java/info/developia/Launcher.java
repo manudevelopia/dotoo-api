@@ -2,14 +2,12 @@ package info.developia;
 
 import info.developia.dotoo.api.persistence.Persistence;
 import info.developia.dotoo.api.server.GraphqlService;
-import info.developia.dotoo.api.service.TaskService;
+import info.developia.gti.Gti;
 
 public class Launcher {
     public static final Persistence persistence = new Persistence("info.developia.dotoo.api.repository.mapper");
 
     public static void main(String[] args) {
-        var taskService = new TaskService();
-        var server = new GraphqlService(taskService);
-        server.start();
+        Gti.inject().with(persistence).startOn(GraphqlService.class).start();
     }
 }
