@@ -21,7 +21,8 @@ public class GraphqlService {
         try {
             RatpackServer.start(server -> server
                     .serverConfig(builder -> builder.baseDir(BaseDir.find("static/.ratpack.base.dir").toAbsolutePath()))
-                    .handlers(chain -> chain.files(files -> files.dir("resources"))
+                    .handlers(chain -> chain
+                            .files(files -> files.dir("resources"))
                             .post("graphql", this::handle)
                             .get(ctx -> ctx.render(ctx.file("playground/index.html"))))
             );
